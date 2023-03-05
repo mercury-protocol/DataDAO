@@ -7,4 +7,4 @@ The contract also exposes a function which allows the admins to distribute the D
 
 ## Example contracts deployed onto the Hyperspace testnet:
 Mercury DAO Factory: 0xE181AB214a28Ca5e768A2Ea4Dc45A94C59168061
-Mercury Data DAO: 0xc41A647Cf3EaC0C5d404e91A6e48D144E878Fe6b 
+Mercury Data DAO: 0x836191cc715cb6A2b26c020baB502656Ea32E5cd 
