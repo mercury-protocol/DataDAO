@@ -1,13 +1,10 @@
-# Sample Hardhat Project
+# Mercury Data DAO contracts
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This repository contains the Mercury Data DAO smart contract and a factory for quickly deploying additional Data DAOs.  
+The DAO members upload files to Filecoin, add the cids to the DAO contract. Once the admin approved the cids they become part of the DAO's offering on the protocol.  
+The contract exposes a function which allows an admin to create a data sell order on the Mercury Protocol.  
+The contract also exposes a function which allows the admins to distribute the DAO's earnings among the DAO members.
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+## Example contracts deployed onto the Hyperspace testnet:
+Mercury DAO Factory: 0xE181AB214a28Ca5e768A2Ea4Dc45A94C59168061
+Mercury Data DAO: 0xc41A647Cf3EaC0C5d404e91A6e48D144E878Fe6b 
