@@ -25,11 +25,13 @@ contract MercuryDataDAO is
     IERC20 public MCY;
     address public dataManager;
 
-    bytes[] public activeDealCids;
+    uint64[] public activeDealIds;
 
     mapping(bytes => uint256) public dealStorageFees;
 
     mapping(bytes => CommonTypes.FilActorId) public dealClient;
+
+    string[] public activeCids;
 
     function initialize(
         string memory name,
@@ -45,7 +47,6 @@ contract MercuryDataDAO is
                 ++i;
             }
         }
-
         MercurySBT _membershipSBT = new MercurySBT(name, symbol, admins);
         membershipSBT = address(_membershipSBT);
         MCY = _MCY;
@@ -78,12 +79,14 @@ contract MercuryDataDAO is
 
     /// @dev Activates the deal
     /// @param _networkDealID: Deal ID generated after the deal is created on Filecoin Network
-    function activateDataSetDealBySP(uint64 _networkDealID)
+    /// @param _cid: The CID of the data uploaded to Filecoin
+    function activateDataSetDealBySP(uint64 _networkDealID, string calldata _cid)
         public
         onlyRole(DEFAULT_ADMIN_ROLE)
     {
-        bytes memory dealCid = activateDeal(_networkDealID);
-        activeDealCids.push(dealCid);
+        activateDeal(_networkDealID);
+        activeDealIds.push(_networkDealID);
+        activeCids.push(_cid);
     }
 
     /// @dev Approves or Rejects the proposal - This would enable to govern the data that is stored by the DAO
@@ -104,7 +107,7 @@ contract MercuryDataDAO is
     }
 
     function getActiveDealsLength() external view returns (uint256) {
-        return activeDealCids.length;
+        return activeDealIds.length;
     }
 
     function getDealDetails(uint64 _dealID)
