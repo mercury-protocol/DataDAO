@@ -88,7 +88,7 @@ contract MercuryDataDAO is
         public
         onlyRole(DEFAULT_ADMIN_ROLE)
     {
-        //activateDeal(_networkDealID);
+        activateDeal(_networkDealID);
         activeDealIds.push(_networkDealID);
         activeCids.push(_cid);
     }
