@@ -12,6 +12,7 @@ import "./DataDAO.sol";
 import "./DataType.sol";
 import "./interfaces/IMercuryDataDAO.sol";
 import "./interfaces/IDataManager.sol";
+import "./interfaces/IMercuryMarketplace.sol";
 
 contract MercuryDataDAO is
     IMercuryDataDAO,
@@ -24,6 +25,7 @@ contract MercuryDataDAO is
     address public membershipSBT;
     IERC20 public MCY;
     address public dataManager;
+    address public marketplace;
 
     uint64[] public activeDealIds;
 
@@ -38,7 +40,8 @@ contract MercuryDataDAO is
         string memory symbol,
         address[] memory admins,
         IERC20 _MCY,
-        address _dataManager
+        address _dataManager,
+        address _marketplace
     ) external initializer {
         for (uint8 i = 0; i < admins.length; ) {
             _setupRole(DEFAULT_ADMIN_ROLE, admins[i]);
@@ -51,6 +54,7 @@ contract MercuryDataDAO is
         membershipSBT = address(_membershipSBT);
         MCY = _MCY;
         dataManager = _dataManager;
+        marketplace = _marketplace;
     }
 
     modifier onlyMember() {
@@ -84,7 +88,7 @@ contract MercuryDataDAO is
         public
         onlyRole(DEFAULT_ADMIN_ROLE)
     {
-        activateDeal(_networkDealID);
+        //activateDeal(_networkDealID);
         activeDealIds.push(_networkDealID);
         activeCids.push(_cid);
     }
@@ -154,6 +158,14 @@ contract MercuryDataDAO is
             _dataUnits,
             _dataType
         );
+    }
+
+    function acceptBuyOrder(
+        bytes32 _id,
+        uint256 _units,
+        bytes32 _dataHash
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        IMarketplace(marketplace).acceptBuyOrder(_id, _units, _dataHash);
     }
 
     function cancelOrder(bytes32 _id) external onlyRole(DEFAULT_ADMIN_ROLE) {

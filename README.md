@@ -6,5 +6,5 @@ The contract exposes a function which allows an admin to create a data sell orde
 The contract also exposes a function which allows the admins to distribute the DAO's earnings among the DAO members.
 
 ## Example contracts deployed onto the Hyperspace testnet:
-Mercury DAO Factory: 0xE181AB214a28Ca5e768A2Ea4Dc45A94C59168061
-Mercury Data DAO: 0x836191cc715cb6A2b26c020baB502656Ea32E5cd 
+Mercury DAO Factory: 0xE181AB214a28Ca5e768A2Ea4Dc45A94C59168061    
+Mercury Data DAO: 0x347F4C341CBbf50CEfF6B3b256989533BD484722 

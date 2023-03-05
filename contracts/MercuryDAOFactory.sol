@@ -9,6 +9,7 @@ import "./MercuryDataDAO.sol";
 contract MercuryDAOFactory is Ownable {
     IERC20 MCY;
     address dataManager;
+    address marketplace;
 
     address masterMercuryDAO;
 
@@ -17,11 +18,13 @@ contract MercuryDAOFactory is Ownable {
     constructor(
         IERC20 _MCY,
         address _dataManager,
-        address _masterMercuryDAO
+        address _masterMercuryDAO,
+        address _marketplace
     ) {
         MCY =_MCY;
         dataManager = _dataManager;
         masterMercuryDAO = _masterMercuryDAO;
+        marketplace = _marketplace;
     }
 
     function createMercuryDataDAO(
@@ -30,7 +33,7 @@ contract MercuryDAOFactory is Ownable {
         address[] memory admins
     ) external {
         MercuryDataDAO _dataDAO = MercuryDataDAO(Clones.clone(masterMercuryDAO));
-        _dataDAO.initialize(name, symbol, admins, MCY, dataManager);
+        _dataDAO.initialize(name, symbol, admins, MCY, dataManager, marketplace);
         deployedDAOs.push(address(_dataDAO));
     }
 
